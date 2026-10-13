@@ -1,0 +1,5 @@
+import mongoose from 'mongoose';
+const item=new mongoose.Schema({product:{type:mongoose.Schema.Types.ObjectId,ref:'Product',required:true},name:String,price:Number,quantity:{type:Number,min:1,required:true}},{_id:false});
+const schema=new mongoose.Schema({orderNumber:{type:String,unique:true},customer:{type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},items:[item],total:{type:Number,required:true},address:{type:String,required:true},phone:{type:String,required:true},paymentMethod:{type:String,enum:['Cash on Delivery'],default:'Cash on Delivery'},paymentStatus:{type:String,enum:['Pending','Paid','Refunded'],default:'Pending'},status:{type:String,enum:['Pending','Confirmed','Preparing','Out for Delivery','Delivered','Cancelled'],default:'Pending'}},{timestamps:true});
+schema.pre('validate',function(next){if(!this.orderNumber)this.orderNumber='SWT-'+Date.now().toString().slice(-8)+'-'+Math.random().toString(36).slice(2,6).toUpperCase();next()});
+export default mongoose.model('Order',schema);

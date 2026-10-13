@@ -1,0 +1,1 @@
+{"name":"sweet-shop-management","version":"1.0.0","private":true,"scripts":{"install:all":"npm --prefix backend install && npm --prefix admin install && npm --prefix customer install","dev:backend":"npm --prefix backend run dev","dev:admin":"npm --prefix admin run dev","dev:customer":"npm --prefix customer run dev"}}
